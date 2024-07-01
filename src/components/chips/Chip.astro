@@ -1,0 +1,20 @@
+---
+import Icon from '../icons/Icon.tsx'
+
+interface Props {
+  icon?: string;
+  text: string;
+  className?: string;
+  iconClass?: string;
+  textClass?: string;
+}
+
+const { icon, text, className, iconClass, textClass}: Props = Astro.props;
+---
+
+<div class={`flex flex-row gap-2 items-center p-2 rounded-full h-8 text-white ${className}`}>
+  {icon &&
+    <Icon icon={icon} width={16} height={16} className={iconClass} />
+  }
+  <p class={`${textClass} text-sm`}>{text}</p>
+</div>

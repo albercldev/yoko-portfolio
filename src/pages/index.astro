@@ -1,0 +1,66 @@
+---
+import GeneralLayout from '../layouts/GeneralLayout.astro';
+import ListadoExperiencias from "../components/ListadoExperiencias.astro";
+import {ComponentProps} from "astro/types";
+import Section from "../components/Section.astro";
+import ListadoTrabajos from "../components/ListadoTrabajos.astro";
+
+const experiencias: ComponentProps<typeof ListadoExperiencias> = [{
+        puesto: "Diseñadora Gráfica",
+        empresa: "YokolateArt",
+        fecha: "desde 2020",
+        parrafos: [
+            "Diseño de logotipos, banners, tarjetas de visita, cartelería, merchandising, etc.",
+        ]
+    },
+    {
+        puesto: "Artista 3D y 2D",
+        empresa: "YokolateArt",
+        fecha: "desde 2020",
+        parrafos: [
+            "Creación de personajes, escenarios, objetos, animaciones, etc.",
+        ]
+    },
+    {
+        puesto: "Ilustradora",
+        empresa: "YokolateArt",
+        fecha: "desde 2020",
+        parrafos: [
+            "Ilustraciones digitales y tradicionales.",
+        ]
+    },
+    {
+        puesto: "Creadora de contenido digital",
+        empresa: "YokolateArt",
+        fecha: "desde 2020",
+        parrafos: [
+            "Creación de contenido para redes sociales, blogs, etc."
+          ]
+    }]
+---
+
+<GeneralLayout title="YokolateArt">
+  <div class="flex flex-col p-6 m-auto max-w-6xl gap-10">
+      <section class="flex flex-col gap-4">
+          <div class="flex flex-col sm:flex-row sm:items-center m-auto gap-4">
+              <div class="flex justify-center aspect-square max-h-32 sm:max-h-16">
+                  <img class="rounded-full border-primary border-2" src="/images/paula.webp" alt="Paula" />
+              </div>
+              <h1 class="font-handwrite text-3xl text-primary font-bold text-center">Hola! Soy Paula!</h1>
+          </div>
+          <p class="w-auto text-center">
+              <span class="text-secondary font-bold">Artista 3D y 2D, ilustradora, diseñadora gráfica y creadora de contenido digital</span> de Valencia, España.
+              Especializada en desarrollo de videojuegos.
+          </p>
+      </section>
+      <Section title="Experiencia">
+          <ListadoExperiencias experiencias={experiencias} />
+      </Section>
+      <Section title="Trabajos">
+          <ListadoTrabajos />
+      </Section>
+  </div>
+</GeneralLayout>
+<style>
+
+</style>
