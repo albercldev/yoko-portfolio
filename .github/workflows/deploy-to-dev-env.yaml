@@ -1,0 +1,46 @@
+name: Deploy to Dev env
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Wireguard
+        run: sudo apt install wireguard openresolv
+
+      - name: Set up Wireguard
+        run: |
+          echo "${{ secrets.wireguard_config }}" > wg0.conf
+          wg-quick up ./wg0.conf
+
+      - name: Test connection to NAS
+        run: ping nas.albercl.dev -c 1
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            deploy.sh
+          sparse-checkout-cone-mode: false
+
+      - name: Setup SSH
+        env:
+          SERVER_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${SERVER_PRIVATE_KEY}" > ~/.ssh/id
+          chmod 600 ~/.ssh/id
+          ssh-keyscan -p 2222 -H nas.albercl.dev >> ~/.ssh/known_hosts
+
+      - name: Check SSH credentials
+        run: ssh -i ~/.ssh/id -p 2222 runner@nas.albercl.dev echo "SSH connection successful"
+
+      - name: Deploy
+        env:
+          GIT_TOKEN: ${{ secrets.NAS_GIT_TOKEN }}
+        run: |
+          sed -i "s/GITHUB_TOKEN/${GIT_TOKEN}/g" deploy.sh
+          ssh -i ~/.ssh/id -p 2222 runner@nas.albercl.dev sh -s < deploy.sh
