@@ -4,15 +4,18 @@ import BlenderChip from "./chips/BlenderChip.astro";
 interface Props {
   title: string;
   img: string;
+  href: string;
   parrafos?: string[];
 }
 
-const { title, img, parrafos = [] }: Props = Astro.props;
+const { title, img, href, parrafos = [] }: Props = Astro.props;
 
 ---
 
-<div class="flex flex-col md:flex-row gap-4 p-2">
-  <img class="rounded-xl md:w-1/2" src={img} alt={title} width="1280" height="720"/>
+<div class="flex flex-col md:flex-row gap-4 md:gap-12 p-2">
+  <a href={href} class="md:w-[1280px]">
+    <img class="rounded-xl" src={img} alt={title} width="1280" height="720"/>
+  </a>
   <div class="flex flex-col gap-4">
     <h3 class="text-xl font-handwrite text-primary text-center">{title}</h3>
     {parrafos.map((parrafo) =>
@@ -22,6 +25,13 @@ const { title, img, parrafos = [] }: Props = Astro.props;
     <div class="flex flex-row gap-2 justify-center">
       <UnrealEngineChip />
       <BlenderChip />
+    </div>
+    <div class="flex flex-row gap-2 justify-center flex-grow">
+      <a href={href}>
+        <button class="bg-primary text-backgroundSecondary font-handwrite p-2 rounded-md hover:brightness-90">
+          Ver más
+        </button>
+      </a>
     </div>
   </div>
 </>

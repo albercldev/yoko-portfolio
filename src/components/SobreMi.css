@@ -1,0 +1,32 @@
+.img {
+    grid-area: sobre-mi-img;
+}
+
+.title {
+    grid-area: sobre-mi-title;
+}
+
+.text {
+    grid-area: sobre-mi-text;
+}
+
+.sobre-mi-grid {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-rows: auto 200px auto;
+    grid-template-areas:
+        'sobre-mi-title'
+        'sobre-mi-img'
+        'sobre-mi-text';
+}
+
+@media (min-width: 768px) {
+    .sobre-mi-grid {
+        gap: 1rem;
+        grid-template-columns: 200px auto;
+        grid-template-rows: 30px auto;
+        grid-template-areas:
+            'sobre-mi-img sobre-mi-title'
+            'sobre-mi-img sobre-mi-text';
+    }
+}

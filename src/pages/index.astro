@@ -3,10 +3,11 @@ import GeneralLayout from '../layouts/GeneralLayout.astro';
 import ListadoExperiencias from "../components/ListadoExperiencias.astro";
 import Section from "../components/Section.astro";
 import ListadoTrabajos from "../components/ListadoTrabajos.astro";
+import SobreMi from "../components/SobreMi.astro";
 ---
 
 <GeneralLayout title="YokolateArt">
-  <div class="flex flex-col p-6 m-auto max-w-6xl gap-10">
+  <div class="flex flex-col p-6 m-auto max-w-6xl gap-20">
       <section class="flex flex-col gap-4">
           <div class="flex flex-col sm:flex-row sm:items-center m-auto gap-4">
               <div class="flex justify-center aspect-square max-h-32 sm:max-h-16">
@@ -25,6 +26,7 @@ import ListadoTrabajos from "../components/ListadoTrabajos.astro";
       <Section title="Trabajos">
           <ListadoTrabajos />
       </Section>
+      <SobreMi />
   </div>
 </GeneralLayout>
 <style>
