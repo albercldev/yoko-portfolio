@@ -4,43 +4,39 @@ on:
   push:
     branches:
       - main
+
+  # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+  permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+  # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+  # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+  concurrency:
+    group: "pages"
+    cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Wireguard
-        run: sudo apt install wireguard openresolv
-
-      - name: Set up Wireguard
-        run: |
-          echo "${{ secrets.wireguard_config }}" > wg0.conf
-          wg-quick up ./wg0.conf
-
-      - name: Test connection to NAS
-        run: ping nas.albercl.dev -c 1
-
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          sparse-checkout: |
-            deploy.sh
-          sparse-checkout-cone-mode: false
+          node-version: 14
+      - run: npm i
+      - run: npm run build
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
-      - name: Setup SSH
-        env:
-          SERVER_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "${SERVER_PRIVATE_KEY}" > ~/.ssh/id
-          chmod 600 ~/.ssh/id
-          ssh-keyscan -p 2222 -H nas.albercl.dev >> ~/.ssh/known_hosts
 
-      - name: Check SSH credentials
-        run: ssh -i ~/.ssh/id -p 2222 runner@nas.albercl.dev echo "SSH connection successful"
-
-      - name: Deploy
-        env:
-          GIT_TOKEN: ${{ secrets.NAS_GIT_TOKEN }}
-        run: |
-          sed -i "s/GITHUB_TOKEN/${GIT_TOKEN}/g" deploy.sh
-          ssh -i ~/.ssh/id -p 2222 runner@nas.albercl.dev sh -s < deploy.sh

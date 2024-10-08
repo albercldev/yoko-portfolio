@@ -17,7 +17,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="bg-backgroundPrimary font-sans">
+	<body class="bg-backgroundPrimary font-sans min-h-lvh flex flex-col ">
 		<header class="bg-backgroundPrimary h-16">
 			<nav class="h-full flex">
 				<a href="/" class="font-handwrite text-primary flex flex-row flex-nowrap h-full p-2 items-center gap-2">
@@ -26,8 +26,10 @@ const { title } = Astro.props;
 				</a>
 			</nav>
 		</header>
-		<main class="bg-backgroundSecondary">
-			<slot />
+		<main class="bg-backgroundSecondary flex-grow">
+			<div class="flex flex-col p-6 m-auto max-w-6xl gap-20">
+				<slot />
+			</div>
 		</main>
 		<footer class="bg-backgroundPrimary min-h-12 flex flex-col align-middle">
 			<div class="m-auto">

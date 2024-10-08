@@ -36,20 +36,20 @@ const experiencias = [{
   }]
 ---
 
-<ol>
+<ol class="max-w-3xl m-auto">
   {experiencias.map((experiencia) =>
-      <li class="flex flex-row mx-6 before:relative before:border-l-primary before:border-l-2 gap-5">
-        <div class="flex flex-col gap-2 my-3">
-          <h2 class="text-xl text-primary font-bold transform font-handwrite before:rounded-full before:w-3 before:h-3 before:bg-secondary before:text-secondary before:block before:fixed before:left-[-1.7rem] before:top-[0.5rem] before:text-5xl">
-            {experiencia.puesto}
-          </h2>
-          <p>En <span class="text-secondary font-bold">{experiencia.empresa}</span> {experiencia.fecha}.</p>
-          {experiencia.parrafos.map((parrafo) => <p>{parrafo}</p> )}
-          <div class="flex flex-row gap-3">
-            <UnrealEngineChip />
-            <BlenderChip />
-          </div>
+    <li class="flex flex-row mx-6 before:relative before:border-l-primary before:border-l-2 gap-5">
+      <div class="flex flex-col gap-2 my-3">
+        <h2 class="text-xl text-primary font-bold transform font-handwrite before:rounded-full before:w-3 before:h-3 before:bg-secondary before:text-secondary before:block before:fixed before:left-[-1.7rem] before:top-[0.5rem] before:text-5xl">
+          {experiencia.puesto}
+        </h2>
+        <p>En <span class="text-secondary font-bold">{experiencia.empresa}</span> {experiencia.fecha}.</p>
+        {experiencia.parrafos.map((parrafo) => <p>{parrafo}</p> )}
+        <div class="flex flex-row gap-3">
+          <UnrealEngineChip />
+          <BlenderChip />
         </div>
-      </li>
+      </div>
+    </li>
   )}
 </ol>

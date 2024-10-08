@@ -7,27 +7,25 @@ import SobreMi from "../components/SobreMi.astro";
 ---
 
 <GeneralLayout title="YokolateArt">
-  <div class="flex flex-col p-6 m-auto max-w-6xl gap-20">
-      <section class="flex flex-col gap-4">
-          <div class="flex flex-col sm:flex-row sm:items-center m-auto gap-4">
-              <div class="flex justify-center aspect-square max-h-32 sm:max-h-16">
-                  <img class="rounded-full border-primary border-2" src="/images/paula.webp" alt="Paula" />
-              </div>
-              <h1 class="font-handwrite text-3xl text-primary font-bold text-center">Hola! Soy Paula!</h1>
+  <section class="flex flex-col gap-4 max-w-3xl m-auto">
+      <div class="flex flex-col sm:flex-row sm:items-center m-auto gap-4">
+          <div class="flex justify-center aspect-square max-h-32 sm:max-h-16">
+              <img class="rounded-full border-primary border-2" src="/images/paula.webp" alt="Paula" />
           </div>
-          <p class="w-auto text-center">
-              <span class="text-secondary font-bold">Artista 3D y 2D, ilustradora, diseñadora gráfica y creadora de contenido digital</span> de Valencia, España.
-              Especializada en desarrollo de videojuegos.
-          </p>
-      </section>
-      <Section title="Experiencia">
-          <ListadoExperiencias />
-      </Section>
-      <Section title="Trabajos">
-          <ListadoTrabajos />
-      </Section>
-      <SobreMi />
-  </div>
+          <h1 class="font-handwrite text-3xl text-primary font-bold text-center">Hola! Soy Paula!</h1>
+      </div>
+      <p class="w-auto text-center">
+          <span class="text-secondary font-bold">Artista 3D y 2D, ilustradora, diseñadora gráfica y creadora de contenido digital</span> de Valencia, España.
+          Especializada en desarrollo de videojuegos.
+      </p>
+  </section>
+  <Section title="Experiencia">
+      <ListadoExperiencias />
+  </Section>
+  <Section title="Trabajos">
+      <ListadoTrabajos />
+  </Section>
+  <SobreMi />
 </GeneralLayout>
 <style>
 
