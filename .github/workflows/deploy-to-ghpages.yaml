@@ -33,9 +33,9 @@ jobs:
       - name: Copy resources
         run: |
           mkdir -p _site
-          cp -r ./dist/* _site/
-          cp -r ./public/* _site/
-          cp -r ./images/* _site/
+          cp ./dist _site/
+          cp ./public _site/
+          cp ./images _site/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
